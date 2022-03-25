@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LinearLayoutbottomSheet"
+    android:layout_width="match_parent"
+    android:background="@drawable/bottom_sheet_drawable"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LinearLayout1">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/baglantıSheet"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="55dp"
+        android:src="@drawable/ic_baseline_insert_link_24" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/paylasSheet"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="55dp"
+        android:layout_marginTop="35dp"
+        android:src="@drawable/ic_baseline_share_24" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/sikayetSheet"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="55dp"
+        android:src="@drawable/unlemk" />
+
+</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/LinearLayout2">
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="53dp"
+            android:layout_marginTop="5dp"
+            android:textSize="18dp"
+            android:text="Bağlantı"
+            android:textStyle="bold"
+            android:textAlignment="center"/>
+        <TextView
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:textSize="18dp"
+            android:textAlignment="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="48dp"
+            android:text="Paylaş"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:textSize="18dp"
+            android:layout_marginLeft="40dp"
+            android:textAlignment="center"
+            android:layout_marginTop="5dp"
+            android:text="Şikayet Et"
+            android:textColor="#DC1515"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/LinearLayout3"
+        android:layout_marginTop="18dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textSize="16dp"
+            android:layout_marginLeft="6dp"
+            android:textStyle="bold"
+            android:text="Bu gönderiyi neden görüyorsun?"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Gizle"
+            android:textSize="16dp"
+            android:layout_marginLeft="6dp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Takibi bırak"
+            android:layout_marginLeft="6dp"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+</LinearLayout>
+
+

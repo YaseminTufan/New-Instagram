@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/user_circle"
+            android:layout_width="44sp"
+            android:layout_height="44sp"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="10dp"
+            app:srcCompat="@drawable/ic_launcher_background" />
+
+        <LinearLayout
+            android:id="@+id/linearLayoutLocation"
+            android:layout_width="293dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+
+            <TextView
+                android:id="@+id/userName"
+                android:layout_width="270dp"
+                android:layout_height="25dp"
+                android:hint="Name"
+                android:paddingLeft="6dp"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/location_text"
+                android:layout_width="270dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="2dp"
+                android:drawableStart="@drawable/ic_baseline_location_on_24"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/userImage"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/user_circle"
+                app:layout_constraintTop_toBottomOf="@+id/userName"
+                app:layout_constraintVertical_bias="1.0" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageViewThreeDot"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginLeft="15dp"
+
+            app:srcCompat="@drawable/ic_baseline_more_vert_24" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/userImage"
+            android:layout_width="411dp"
+            android:layout_height="213dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginBottom="16dp"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/ic_launcher_background" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+            <ImageView
+                android:id="@+id/imageViewLikeIcon"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="33dp"
+                android:src="@drawable/kalpimage"
+                app:srcCompat="@drawable/kalpimage" />
+
+            <ImageView
+                android:id="@+id/imageViewCommentIcon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="33dp"
+                android:src="@drawable/tt" />
+
+            <ImageView
+                android:id="@+id/imageViewShareIcon"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="33dp"
+                android:src="@drawable/share" />
+
+            <ImageView
+                android:id="@+id/ImageViewSaveIcon"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="218dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="33dp"
+                android:src="@drawable/yyy" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+            <TextView
+                android:id="@+id/TextViewNumber"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="1dp" />
+
+            <TextView
+                android:id="@+id/TextViewLike"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="1dp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/TextViewUser"
+                android:layout_weight="0"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:minWidth="60dp"
+                android:layout_marginLeft="10dp"/>
+
+
+            <EditText
+                android:id="@+id/userComment"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:ems="10"
+                android:hint="Comment"
+                android:inputType="textPersonName" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

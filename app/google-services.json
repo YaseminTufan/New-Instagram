@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1085658818458",
+    "project_id": "instagram-first-17bb5",
+    "storage_bucket": "instagram-first-17bb5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1085658818458:android:8e5715325d126c4c633c23",
+        "android_client_info": {
+          "package_name": "com.yasemintufan.instagramfirst"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1085658818458-tlju0jrm2750n3goq3ovkuo4b907nb1u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBT78u-dxedTbio0mgNcttnCdzejTkQSi8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1085658818458-tlju0jrm2750n3goq3ovkuo4b907nb1u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
