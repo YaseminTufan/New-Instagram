@@ -31,9 +31,7 @@ public class RecyclerviewImageAdapter extends RecyclerView.Adapter<RecyclerviewI
         @Override
         public void onBindViewHolder(@NonNull PhotosViewHolder holder, int position) {
             holder.cardViewImage.setImageResource(imageDataList.get(position).getImage());
-
         }
-
         @Override
         public int getItemCount() {
             return imageDataList.size();

@@ -35,13 +35,13 @@ public class StartActivity extends AppCompatActivity {
         });
     }
 
-   /* @Override
+    @Override
     protected void onStart() {
         super.onStart();
         if(FirebaseAuth.getInstance().getCurrentUser() != null) {
             startActivity(new Intent(StartActivity.this,MainActivity.class));
             finish();
         }
-    }*/
+    }
 }
 
