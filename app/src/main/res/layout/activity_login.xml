@@ -8,6 +8,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="12dp"
+    android:id="@+id/linear"
     tools:context=".RegisterActivity">
 
     <TextView
@@ -21,13 +22,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:hint="Email"
+        android:imeOptions="actionNext"
         android:padding="10dp"
         android:id="@+id/email"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:hint="Password"
+        android:hint="@string/password"
+        android:imeOptions="actionDone"
         android:padding="10dp"
         android:id="@+id/password"/>
     <Button

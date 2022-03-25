@@ -110,7 +110,6 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     }
                 });
-
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
