@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -36,7 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
  public class MainActivity extends AppCompatActivity {
-     Button buttonHome, buttonSearch, buttonNotification, buttonProfile;
+     Button buttonHome, buttonSearch, buttonNotification, buttonProfile, buttonPost;
 
      @Override
      protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,7 @@ import java.util.List;
          buttonSearch = findViewById(R.id.buttonSearch);
          buttonNotification = findViewById(R.id.buttonNotification);
          buttonProfile = findViewById(R.id.buttonProfile);
+         buttonPost = findViewById(R.id.buttonPost);
 
          if(savedInstanceState == null) {
              HomeFragment homeFragment = new HomeFragment();
@@ -78,7 +80,6 @@ import java.util.List;
                  goToFragment(notificationFragment);
              }
          });
-
          buttonProfile.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
@@ -86,9 +87,13 @@ import java.util.List;
                  goToFragment(profileFragment);
              }
          });
-
+         buttonPost.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 startActivity(new Intent(MainActivity.this,PostActivity.class));
+             }
+         });
      }
-
      protected void goToFragment(Fragment fragment) {
          FragmentManager fragmentManager = getSupportFragmentManager();
          FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
