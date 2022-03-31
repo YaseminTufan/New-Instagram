@@ -37,14 +37,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapter.RecyclerviewHolder> {
     Context context;
     List<MainData> mainDataList;
-    List<MainData> filteredMainDataList;
     private boolean isClick = false;
 
 
     public RecyclerviewAdapter(Context context, List<MainData> mainDataList) {
         this.context = context;
         this.mainDataList = mainDataList;
-        this.filteredMainDataList = mainDataList;
     }
     @NonNull
     @Override
@@ -54,19 +52,19 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
     }
     @Override
     public void onBindViewHolder(@NonNull RecyclerviewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.userComment.setText(filteredMainDataList.get(position).getUser().getUserComment());
-        holder.userImage.setImageResource(filteredMainDataList.get(position).getImageUrl());
-        holder.userName.setText(filteredMainDataList.get(position).getUser().getUserName());
-        holder.userCircle.setImageResource(filteredMainDataList.get(position).getUser().getUserCircle());
-        holder.userLocation.setText(filteredMainDataList.get(position).getUser().getUserLocation());
+        holder.userComment.setText(mainDataList.get(position).getUser().getUserComment());
+        holder.userImage.setImageResource(mainDataList.get(position).getImageUrl());
+        holder.userName.setText(mainDataList.get(position).getUser().getUserName());
+        holder.userCircle.setImageResource(mainDataList.get(position).getUser().getUserCircle());
+        holder.userLocation.setText(mainDataList.get(position).getUser().getUserLocation());
         ItemAnimation.animateBottomUp(holder.itemView,position);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, UserDetails.class);
-                intent.putExtra("username", filteredMainDataList.get(position).getUser().getUserName());
-                intent.putExtra("usercomment", filteredMainDataList.get(position).getUser().getUserComment());
+                intent.putExtra("username", mainDataList.get(position).getUser().getUserName());
+                intent.putExtra("usercomment",mainDataList.get(position).getUser().getUserComment());
                 context.startActivity(intent);
             }
         });
@@ -96,7 +94,7 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
             }
         });
 
-        if (filteredMainDataList.get(position).getUser().getUserLocation().contentEquals("")) {
+        if (mainDataList.get(position).getUser().getUserLocation().contentEquals("")) {
             holder.userLocation.setVisibility(View.INVISIBLE);
         } else {
             holder.userLocation.setVisibility(View.VISIBLE);
@@ -104,7 +102,7 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
     }
     @Override
     public int getItemCount() {
-        return filteredMainDataList.size();
+        return mainDataList.size();
     }
 
     public static final class RecyclerviewHolder extends RecyclerView.ViewHolder{
@@ -126,34 +124,7 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
             bottomSheet = itemView.findViewById(R.id.imageViewThreeDot);
         }
     }
-    public Filter getFilter(){
-        return new Filter() {
-            @Override
-            protected FilterResults performFiltering(CharSequence charSequence) {
-                String Key = charSequence.toString();
-                if(Key.isEmpty()){
-                    filteredMainDataList = mainDataList;
-                }
-                else {
-                    List<MainData> lstFiltered = new ArrayList<>();
-                    for (MainData row : mainDataList){
-                        if(row.getUser().getUserName().toLowerCase().contains(Key.toLowerCase())){
-                            lstFiltered.add(row);
-                        }
-                    }
-                    filteredMainDataList = lstFiltered;
-                }
-                FilterResults filterResults = new FilterResults();
-                filterResults.values = filteredMainDataList;
-                return filterResults;
-            }
-            @Override
-            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                filteredMainDataList = (List<MainData>)filterResults.values;
-                notifyDataSetChanged();
-            }
-        };
-    }
+
     private void showBottomSheetDialog() {
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context,R.style.BottomSheetDialogTheme);
         bottomSheetDialog.setContentView(R.layout.layout_bottom_sheet);

@@ -1,101 +1,79 @@
 package com.yasemintufan.instagramfirst;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Filter;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.hendraanggrian.appcompat.widget.SocialAutoCompleteTextView;
 import com.yasemintufan.instagramfirst.adapter.RecyclerviewAdapter;
-import com.yasemintufan.instagramfirst.adapter.RecyclerviewImageAdapter;
-import com.yasemintufan.instagramfirst.model.ImageData;
-import com.yasemintufan.instagramfirst.model.MainData;
+import com.yasemintufan.instagramfirst.adapter.RecyclerviewSearchAdapter;
+import com.yasemintufan.instagramfirst.model.SearchData;
 import com.yasemintufan.instagramfirst.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class SearchFragment extends Fragment {
-    RecyclerviewAdapter recyclerviewAdapter;
-    EditText searchView;
-    CharSequence search = "";
-    RecyclerView searchRecyclerView;
-    RecyclerviewImageAdapter recyclerviewImageAdapter;
+    private RecyclerView recyclerView;
+    private SocialAutoCompleteTextView search_bar;
+    private List<SearchData> mSearchData;
+    private RecyclerviewSearchAdapter recyclerviewSearchAdapter;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
-        searchView = view.findViewById(R.id.search_bar);
-        searchViewTextWatcher(searchView);
-        searchRecyclerView = view.findViewById(R.id.RecyclerSearchFragment);
-        createImageData();
+        recyclerView = view.findViewById(R.id.recycler_view_users);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mSearchData = new ArrayList<>();
+        recyclerviewSearchAdapter = new RecyclerviewSearchAdapter(getContext(),mSearchData,true);
+        recyclerView.setAdapter(recyclerviewSearchAdapter);
+        search_bar = view.findViewById(R.id.search_bar);
+        readUsers();
         return view;
     }
-    private void setSearchRecyclerView (List<ImageData>imageDataList) {
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
-        searchRecyclerView.setLayoutManager(layoutManager);
-        recyclerviewImageAdapter = new RecyclerviewImageAdapter(getContext(),imageDataList);
-        searchRecyclerView.setAdapter(recyclerviewImageAdapter);
-    }
-    public void createImageData(){
-        List<ImageData>imageDataList = new ArrayList<>();
-        imageDataList.add(new ImageData(R.drawable.tatil));
-        imageDataList.add(new ImageData(R.drawable.tatil1));
-        imageDataList.add(new ImageData(R.drawable.tatil2));
-        imageDataList.add(new ImageData(R.drawable.tatil3));
-        imageDataList.add(new ImageData(R.drawable.tatil4));
-        imageDataList.add(new ImageData(R.drawable.tatil5));
-        imageDataList.add(new ImageData(R.drawable.tatil6));
-        imageDataList.add(new ImageData(R.drawable.tatil7));
-        imageDataList.add(new ImageData(R.drawable.tatil8));
-        imageDataList.add(new ImageData(R.drawable.tatil9));
-        imageDataList.add(new ImageData(R.drawable.tatil));
-        imageDataList.add(new ImageData(R.drawable.tatil1));
-        imageDataList.add(new ImageData(R.drawable.tatil2));
-        imageDataList.add(new ImageData(R.drawable.tatil3));
-        imageDataList.add(new ImageData(R.drawable.tatil4));
-        imageDataList.add(new ImageData(R.drawable.tatil5));
-        imageDataList.add(new ImageData(R.drawable.tatil6));
-        imageDataList.add(new ImageData(R.drawable.tatil7));
-        imageDataList.add(new ImageData(R.drawable.tatil8));
-        imageDataList.add(new ImageData(R.drawable.tatil9));
-        imageDataList.add(new ImageData(R.drawable.tatil));
 
-        setSearchRecyclerView(imageDataList);
-        searchRecyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));
+    private void readUsers() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users");
+       reference.addValueEventListener(new ValueEventListener() {
+           @Override
+           public void onDataChange(@NonNull DataSnapshot snapshot) {
+               if(TextUtils.isEmpty(search_bar.getText().toString())){
+                   mSearchData.clear();
+                   for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                       SearchData searchData= dataSnapshot.getValue(SearchData.class);
+                       mSearchData.add(searchData);
+                   }
+                   recyclerviewSearchAdapter.notifyDataSetChanged();
+               }
+           }
 
-    }
+           @Override
+           public void onCancelled(@NonNull DatabaseError error) {
 
+           }
+       });
 
-    private void searchViewTextWatcher(EditText editText) {
-        editText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                recyclerviewAdapter.getFilter().filter(charSequence);
-                search = charSequence;
-            }
-            @Override
-            public void afterTextChanged(Editable editable) {
-            }
-        });
     }
 }
+
