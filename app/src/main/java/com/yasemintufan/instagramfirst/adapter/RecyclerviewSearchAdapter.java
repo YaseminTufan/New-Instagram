@@ -37,7 +37,6 @@ public class RecyclerviewSearchAdapter extends RecyclerView.Adapter<Recyclerview
         this.mSearchData = mSearchData;
         this.isFargment = isFargment;
     }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -56,6 +55,23 @@ public class RecyclerviewSearchAdapter extends RecyclerView.Adapter<Recyclerview
         if(searchData.getId().equals(firebaseUser.getUid())) {
             holder.btnFollow.setVisibility(View.GONE);
         }
+        holder.btnFollow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(holder.btnFollow.getText().toString().equals(("follow"))){
+                    FirebaseDatabase.getInstance().getReference().child("Follow")
+                            .child(firebaseUser.getUid()).child("following").child(searchData.getId()).setValue(true);
+                    FirebaseDatabase.getInstance().getReference().child("Follow")
+                            .child(searchData.getId()).child("followers").child(firebaseUser.getUid()).setValue(true);
+                }else {
+                    FirebaseDatabase.getInstance().getReference().child("Follow")
+                            .child(firebaseUser.getUid()).child("following").child(searchData.getId()).removeValue();
+                    FirebaseDatabase.getInstance().getReference().child("Follow")
+                            .child(searchData.getId()).child("followers").child(firebaseUser.getUid()).removeValue();
+
+                }
+            }
+        });
     }
     private void isFollowed(String id, Button btnFollow) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid())

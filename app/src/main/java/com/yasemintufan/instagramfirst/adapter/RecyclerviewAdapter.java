@@ -23,6 +23,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 import com.yasemintufan.instagramfirst.ItemAnimation;
 import com.yasemintufan.instagramfirst.MainActivity;
 import com.yasemintufan.instagramfirst.R;
@@ -38,11 +41,13 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
     Context context;
     List<MainData> mainDataList;
     private boolean isClick = false;
+    private FirebaseUser firebaseUser;
 
 
     public RecyclerviewAdapter(Context context, List<MainData> mainDataList) {
         this.context = context;
         this.mainDataList = mainDataList;
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     }
     @NonNull
     @Override
@@ -58,7 +63,6 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
         holder.userCircle.setImageResource(mainDataList.get(position).getUser().getUserCircle());
         holder.userLocation.setText(mainDataList.get(position).getUser().getUserLocation());
         ItemAnimation.animateBottomUp(holder.itemView,position);
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
