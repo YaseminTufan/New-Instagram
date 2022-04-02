@@ -31,8 +31,8 @@ import com.google.firebase.storage.StorageTask;
 import com.hendraanggrian.appcompat.socialview.Hashtag;
 import com.hendraanggrian.appcompat.widget.HashtagArrayAdapter;
 import com.hendraanggrian.appcompat.widget.SocialAutoCompleteTextView;
-import com.theartofdev.edmodo.cropper.CropImage;
-
+import com.canhub.cropper.CropImage;
+import com.canhub.cropper.CropImageActivity;
 
 import java.io.File;
 import java.util.HashMap;
@@ -46,7 +46,6 @@ public class PostActivity extends AppCompatActivity {
     private ImageView imageAdded;
     private TextView post;
     SocialAutoCompleteTextView description;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,18 +69,17 @@ public class PostActivity extends AppCompatActivity {
         });
         CropImage.activity().start(PostActivity.this);
     }
-
     private void upload() {
         ProgressDialog pd = new ProgressDialog(this);
         pd.setMessage("Uploading");
         pd.show();
-        if(imageUri != null){
-            StorageReference filePath = FirebaseStorage.getInstance().getReference("Posts").child(System.currentTimeMillis() + "."+ getFileExtension(imageUri));
+        if (imageUri != null) {
+            StorageReference filePath = FirebaseStorage.getInstance().getReference("Posts").child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
             StorageTask uploadtask = filePath.putFile(imageUri);
             uploadtask.continueWithTask(new Continuation() {
                 @Override
                 public Object then(@NonNull Task task) throws Exception {
-                    if(!task.isSuccessful()){
+                    if (!task.isSuccessful()) {
                         throw task.getException();
                     }
                     return filePath.getDownloadUrl();
@@ -93,47 +91,44 @@ public class PostActivity extends AppCompatActivity {
                     imageUrl = downloadUri.toString();
                     DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Posts");
                     String postId = ref.push().getKey();
-                    HashMap<String,Object>map = new HashMap<>();
-                    map.put("postid",postId);
-                    map.put("imageurl",imageUrl);
-                    map.put("description",description.getText().toString());
+                    HashMap<String, Object> map = new HashMap<>();
+                    map.put("postid", postId);
+                    map.put("imageurl", imageUrl);
+                    map.put("description", description.getText().toString());
                     map.put("publiser", FirebaseAuth.getInstance().getCurrentUser().getUid());
                     ref.child(postId).setValue(map);
                     DatabaseReference mHashTagRef = FirebaseDatabase.getInstance().getReference().child("HashTags");
                     List<String> hashTags = description.getHashtags();
-                    if(!hashTags.isEmpty()){
-                        for(String tag:hashTags){
+                    if (!hashTags.isEmpty()) {
+                        for (String tag : hashTags) {
                             map.clear();
-                            map.put("tag",tag.toLowerCase());
-                            map.put("postid",postId);
+                            map.put("tag", tag.toLowerCase());
+                            map.put("postid", postId);
                             mHashTagRef.child(tag.toLowerCase()).child(postId).setValue(map);
                         }
                     }
                     pd.dismiss();
-                    startActivity(new Intent(PostActivity.this,MainActivity.class));
+                    startActivity(new Intent(PostActivity.this, MainActivity.class));
                     finish();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(PostActivity.this,e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PostActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
-        }else {
+        } else {
             Toast.makeText(this, "No image was selected", Toast.LENGTH_SHORT).show();
         }
     }
-
     private String getFileExtension(Uri uri) {
         return MimeTypeMap.getSingleton().getExtensionFromMimeType(this.getContentResolver().getType(uri));
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            imageUri = result.getUri();
             imageAdded.setImageURI(imageUri);
         } else {
             Toast.makeText(this, "Try Again", Toast.LENGTH_SHORT).show();
@@ -141,7 +136,6 @@ public class PostActivity extends AppCompatActivity {
             finish();
         }
     }
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -150,14 +144,11 @@ public class PostActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    hashtagAdapter.add(new Hashtag(dataSnapshot.getKey(),(int)dataSnapshot.getChildrenCount()));
+                    hashtagAdapter.add(new Hashtag(dataSnapshot.getKey(), (int) dataSnapshot.getChildrenCount()));
                 }
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
         description.setHashtagAdapter(hashtagAdapter);
