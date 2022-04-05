@@ -1,4 +1,4 @@
-package com.yasemintufan.instagramfirst;
+package com.yasemintufan.instagramfirst.fragment;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -21,6 +21,8 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
+import com.yasemintufan.instagramfirst.R;
+import com.yasemintufan.instagramfirst.StartActivity;
 
 public class ProfileFragment extends Fragment {
     ImageView image_profile, options, add;

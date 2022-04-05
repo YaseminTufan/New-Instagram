@@ -1,58 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/FrameHomeLayout"
+<RelativeLayout android:layout_width="match_parent"
+android:layout_height="match_parent"
+xmlns:android="http://schemas.android.com/apk/res/android">
+
+<com.google.android.material.appbar.AppBarLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
-    <LinearLayout
+    android:layout_height="wrap_content"
+    android:id="@+id/bar"
+    android:background="?android:attr/windowBackground">
+
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar"
+        android:background="?android:attr/windowBackground">
 
-        <TextView
-            android:layout_width="130dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="10dp"
-            android:fontFamily="cursive"
-            android:text="Instagram"
-            android:textColor="@color/cardview_dark_background"
-            android:textSize="30dp"
-            android:textStyle="bold" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <ImageView
-            android:layout_width="35dp"
-            android:layout_height="25dp"
-            android:layout_marginStart="140dp"
-            android:layout_marginTop="5dp"
-            android:src="@drawable/ic_baseline_add_24"/>
-        <ImageView
-            android:layout_width="35dp"
-            android:layout_height="25dp"
-            android:layout_marginTop="5dp"
-            android:src="@drawable/kalpimage"/>
-        <ImageView
-            android:layout_width="35dp"
-            android:layout_height="25dp"
-            android:layout_marginTop="5dp"
-            android:src="@drawable/ic_baseline_electric_bolt_24"/>
+            <TextView
+                android:layout_width="160dp"
+                android:layout_height="30dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="3dp"
+                android:text="Instagram"
+                android:textSize="25dp" />
 
-    </LinearLayout>
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/share"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="10dp"/>
 
+        </RelativeLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/homeRecyclerView"
+    </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/LinearLayoutButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_story"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_posts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 
-</FrameLayout>
-
+</RelativeLayout>
 
 

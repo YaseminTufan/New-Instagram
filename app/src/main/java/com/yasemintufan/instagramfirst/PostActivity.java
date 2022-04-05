@@ -3,10 +3,14 @@ package com.yasemintufan.instagramfirst;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -15,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.canhub.cropper.CropImage;
+import com.canhub.cropper.CropImageActivity;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -31,8 +37,6 @@ import com.google.firebase.storage.StorageTask;
 import com.hendraanggrian.appcompat.socialview.Hashtag;
 import com.hendraanggrian.appcompat.widget.HashtagArrayAdapter;
 import com.hendraanggrian.appcompat.widget.SocialAutoCompleteTextView;
-import com.canhub.cropper.CropImage;
-import com.canhub.cropper.CropImageActivity;
 
 import java.io.File;
 import java.util.HashMap;
@@ -46,6 +50,7 @@ public class PostActivity extends AppCompatActivity {
     private ImageView imageAdded;
     private TextView post;
     SocialAutoCompleteTextView description;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +74,7 @@ public class PostActivity extends AppCompatActivity {
         });
         CropImage.activity().start(PostActivity.this);
     }
+
     private void upload() {
         ProgressDialog pd = new ProgressDialog(this);
         pd.setMessage("Uploading");
@@ -121,14 +127,17 @@ public class PostActivity extends AppCompatActivity {
             Toast.makeText(this, "No image was selected", Toast.LENGTH_SHORT).show();
         }
     }
+
     private String getFileExtension(Uri uri) {
         return MimeTypeMap.getSingleton().getExtensionFromMimeType(this.getContentResolver().getType(uri));
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            imageUri = result.getUriContent();
             imageAdded.setImageURI(imageUri);
         } else {
             Toast.makeText(this, "Try Again", Toast.LENGTH_SHORT).show();
@@ -136,6 +145,7 @@ public class PostActivity extends AppCompatActivity {
             finish();
         }
     }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -147,6 +157,7 @@ public class PostActivity extends AppCompatActivity {
                     hashtagAdapter.add(new Hashtag(dataSnapshot.getKey(), (int) dataSnapshot.getChildrenCount()));
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }

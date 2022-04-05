@@ -1,42 +1,21 @@
 package com.yasemintufan.instagramfirst;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.yasemintufan.instagramfirst.adapter.RecyclerviewAdapter;
-import com.yasemintufan.instagramfirst.model.MainData;
-import com.yasemintufan.instagramfirst.model.User;
+import com.yasemintufan.instagramfirst.fragment.HomeFragment;
+import com.yasemintufan.instagramfirst.fragment.NotificationFragment;
+import com.yasemintufan.instagramfirst.fragment.ProfileFragment;
+import com.yasemintufan.instagramfirst.fragment.SearchFragment;
 
-import java.util.ArrayList;
-import java.util.List;
-
- public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
      Button buttonHome, buttonSearch, buttonNotification, buttonProfile, buttonPost;
 
      @Override

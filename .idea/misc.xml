@@ -4,13 +4,18 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/drawable/button_background.xml" value="0.2095" />
+        <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/drawable/ic_baseline_fav.xml" value="0.1905" />
+        <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.2195" />
         <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2095" />
+        <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/layout/activity_comment.xml" value="0.2246376811594203" />
+        <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/layout/activity_comment2.xml" value="0.2246376811594203" />
         <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/layout/activity_login.xml" value="0.2164855072463768" />
         <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/layout/activity_post.xml" value="0.20380434782608695" />
         <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/layout/activity_register.xml" value="0.2164855072463768" />
         <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/layout/activity_start.xml" value="0.2164855072463768" />
         <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/layout/activity_user_details.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/layout/data_search.xml" value="0.12183383991894631" />
         <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/layout/fragment_home.xml" value="0.2164855072463768" />
         <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/layout/fragment_notification.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/layout/fragment_profile.xml" value="0.2164855072463768" />

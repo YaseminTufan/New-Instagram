@@ -40,7 +40,7 @@ public class RecyclerviewSearchAdapter extends RecyclerView.Adapter<Recyclerview
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.photos_search,parent,false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.data_search,parent,false);
         return new RecyclerviewSearchAdapter.ViewHolder(view);
     }
     @Override
