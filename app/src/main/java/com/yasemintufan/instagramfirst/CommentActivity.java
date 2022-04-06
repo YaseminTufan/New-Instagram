@@ -23,6 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
@@ -62,19 +63,20 @@ public class CommentActivity extends AppCompatActivity {
                 finish();
             }
         });
+        Intent intent = getIntent();
+        postId = intent.getStringExtra("postId");
+        authorId = intent.getStringExtra("authorId");
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         commentList = new ArrayList<>();
-        commentAdapter =new CommentAdapter(this,commentList,fUser);
+        commentAdapter =new CommentAdapter(this,commentList,fUser,postId);
         recyclerView.setAdapter(commentAdapter);
         addComment = findViewById(R.id.add_comment);
         imageProfile = findViewById(R.id.image_profile);
         post = findViewById(R.id.post);
 
-        Intent intent = getIntent();
-        postId = intent.getStringExtra("postId");
-        authorId = intent.getStringExtra("authorId");
+
         fUser = FirebaseAuth.getInstance().getCurrentUser();
 
         getUserImage();
@@ -113,20 +115,24 @@ public class CommentActivity extends AppCompatActivity {
 
     private void putComment() {
         HashMap<String,Object> map = new HashMap<>();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Comments").child(postId);
+        String id = ref.push().getKey();
+        map.put("id", id );
         map.put("comment",addComment.getText().toString());
         map.put("publiser",fUser.getUid());
 
-        FirebaseDatabase.getInstance().getReference().child("Comments").child(postId)
-                .push().setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
+        addComment.setText("");
+
+
+
+
+               ref.child(id).setValue(map).addOnCompleteListener((task)-> {
                 if (task.isSuccessful()) {
                     Toast.makeText(CommentActivity.this, "Comment added!", Toast.LENGTH_SHORT).show();
                 }else {
                     Toast.makeText(CommentActivity.this,task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
+               });
     }
 
     private void getUserImage() {
