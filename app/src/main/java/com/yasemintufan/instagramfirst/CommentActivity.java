@@ -3,6 +3,8 @@ package com.yasemintufan.instagramfirst;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ActionBar;
 import android.content.Intent;
@@ -24,13 +26,21 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+import com.yasemintufan.instagramfirst.adapter.CommentAdapter;
+import com.yasemintufan.instagramfirst.model.Comment;
 import com.yasemintufan.instagramfirst.model.SearchData;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CommentActivity extends AppCompatActivity {
+    private RecyclerView recyclerView;
+    private CommentAdapter commentAdapter;
+    private List<Comment> commentList;
+
     private EditText addComment;
     private CircleImageView imageProfile;
     private TextView post;
@@ -52,6 +62,12 @@ public class CommentActivity extends AppCompatActivity {
                 finish();
             }
         });
+        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        commentList = new ArrayList<>();
+        commentAdapter =new CommentAdapter(this,commentList,fUser);
+        recyclerView.setAdapter(commentAdapter);
         addComment = findViewById(R.id.add_comment);
         imageProfile = findViewById(R.id.image_profile);
         post = findViewById(R.id.post);
@@ -72,7 +88,27 @@ public class CommentActivity extends AppCompatActivity {
                 }
             }
         });
+        getComment();
 
+    }
+
+    private void getComment() {
+        FirebaseDatabase.getInstance().getReference().child("Comments").child(postId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                commentList.clear();
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Comment comment = dataSnapshot.getValue(Comment.class);
+                    commentList.add(comment);
+                }
+                commentAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void putComment() {
