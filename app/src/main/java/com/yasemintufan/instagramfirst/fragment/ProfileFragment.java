@@ -38,6 +38,7 @@ import com.yasemintufan.instagramfirst.model.Post;
 import com.yasemintufan.instagramfirst.model.SearchData;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -67,11 +68,13 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile,container,false);
         fUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        String data = getContext().getSharedPreferences("PROFİLE", Context.MODE_PRIVATE).getString("profileId","none");
+        String data = getContext().getSharedPreferences("PROFILE", Context.MODE_PRIVATE).getString("profileId","none");
         if (data.equals("none")){
             profileId = fUser.getUid();
         }else {
             profileId = data;
+            getContext().getSharedPreferences("PROFILE",Context.MODE_PRIVATE).edit().clear().apply();
+
         }
         imageProfile = view.findViewById(R.id.image_profile);
         options = view.findViewById(R.id.options);
@@ -89,6 +92,7 @@ public class ProfileFragment extends Fragment {
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(),3));
         myPhotoList = new ArrayList<>();
         photoAdapter = new PhotoAdapter(getContext(),myPhotoList);
+        recyclerView.setAdapter(photoAdapter);
 
         userInfo();
         getFollowersAndFollowingCount();
@@ -126,6 +130,25 @@ public class ProfileFragment extends Fragment {
     }
 
     private void myPhotos() {
+        FirebaseDatabase.getInstance().getReference().child("Posts").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                myPhotoList.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Post post = dataSnapshot.getValue(Post.class);
+                    if (post.getPubliser().equals(profileId)) {
+                        myPhotoList.add(post);
+                    }
+                }
+                Collections.reverse(myPhotoList);
+                photoAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 
