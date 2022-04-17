@@ -3,19 +3,30 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1915" />
         <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/drawable/bottom_sheet_drawable.xml" value="0.1915" />
         <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/drawable/button_background.xml" value="0.2095" />
         <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1915" />
         <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/drawable/ic_baseline_apps_24.xml" value="0.1915" />
         <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/drawable/ic_baseline_bookmark_border_24.xml" value="0.1915" />
+        <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/drawable/ic_baseline_dehaze_24.xml" value="0.1915" />
+        <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/drawable/ic_baseline_electric_bolt_24.xml" value="0.1915" />
         <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/drawable/ic_baseline_fav.xml" value="0.1905" />
         <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.2195" />
+        <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/drawable/ic_baseline_favorite_border_24.xml" value="0.1915" />
         <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.1915" />
         <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/drawable/ic_baseline_insert_link_24.xml" value="0.1915" />
+        <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/drawable/ic_baseline_location_on_24.xml" value="0.1915" />
+        <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/drawable/ic_baseline_near_me_24.xml" value="0.1915" />
         <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1915" />
+        <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/drawable/ic_baseline_play_arrow_24.xml" value="0.1915" />
+        <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1915" />
+        <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/drawable/ic_baseline_share_24.xml" value="0.1915" />
         <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2095" />
+        <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/drawable/ic_save_black.xml" value="0.1055" />
         <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/layout/activity_comment.xml" value="0.2246376811594203" />
         <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/layout/activity_comment2.xml" value="0.2246376811594203" />
+        <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/layout/activity_edit_pofile.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/layout/activity_login.xml" value="0.2164855072463768" />
         <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/layout/activity_post.xml" value="0.20380434782608695" />
@@ -26,6 +37,7 @@
         <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/layout/data_search.xml" value="0.12183383991894631" />
         <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/layout/fragment_home.xml" value="0.2164855072463768" />
         <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/layout/fragment_notification.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/layout/fragment_post_detail.xml" value="0.25052083333333336" />
         <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/layout/fragment_profile.xml" value="0.2164855072463768" />
         <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/layout/fragment_search.xml" value="0.2164855072463768" />
         <entry key="..\:/Users/a/AndroidStudioProjects/DEvelop/app/src/main/res/layout/layout_bottom_sheet.xml" value="0.2164855072463768" />

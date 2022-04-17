@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,6 +23,8 @@ import com.hendraanggrian.appcompat.widget.SocialTextView;
 import com.squareup.picasso.Picasso;
 import com.yasemintufan.instagramfirst.CommentActivity;
 import com.yasemintufan.instagramfirst.R;
+import com.yasemintufan.instagramfirst.fragment.PostDetailFragment;
+import com.yasemintufan.instagramfirst.fragment.ProfileFragment;
 import com.yasemintufan.instagramfirst.model.Post;
 import com.yasemintufan.instagramfirst.model.SearchData;
 
@@ -73,6 +76,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         isLiked(post.getPostid(),holder.like);
         noOfLikes(post.getPostid(),holder.noOfLikes);
         getComments(post.getPostid(),holder.noOfComments);
+        isSaved(post.getPostid(),holder.save);
         holder.like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -102,6 +106,54 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 intent.putExtra("postId",post.getPostid());
                 intent.putExtra("authorId",post.getPubliser());
                 mContext.startActivity(intent);
+            }
+        });
+        holder.save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(holder.save.getTag().equals("save")) {
+                    FirebaseDatabase.getInstance().getReference().child("Saves")
+                            .child(firebaseUser.getUid()).child(post.getPostid()).setValue(true);
+                }else {
+                    FirebaseDatabase.getInstance().getReference().child("Saves")
+                            .child(firebaseUser.getUid()).child(post.getPostid()).removeValue();
+
+                }
+            }
+        });
+        holder.imageProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mContext.getSharedPreferences("PROFILE",Context.MODE_PRIVATE)
+                        .edit().putString("profileid",post.getPubliser()).apply();
+                ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frameLayout,new ProfileFragment()).commit();
+            }
+        });
+        holder.username.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mContext.getSharedPreferences("PROFILE",Context.MODE_PRIVATE)
+                        .edit().putString("profileid",post.getPubliser()).apply();
+                ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frameLayout,new ProfileFragment()).commit();
+            }
+        });
+        holder.author.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mContext.getSharedPreferences("PROFILE",Context.MODE_PRIVATE)
+                        .edit().putString("profileid",post.getPubliser()).apply();
+                ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frameLayout,new ProfileFragment()).commit();
+            }
+        });
+        holder.postImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mContext.getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit().putString("postid",post.getPostid()).apply();
+                ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.frameLayout,new PostDetailFragment()).commit();
             }
         });
     }
@@ -139,6 +191,26 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             noOfComments = itemView.findViewById(R.id.no_of_comments);
             description = itemView.findViewById(R.id.description);
         }
+    }
+    private void isSaved (String postId,ImageView image){
+        FirebaseDatabase.getInstance().getReference().child("Saves").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.child(postId).exists()) {
+                    image.setImageResource(R.drawable.ic_save_black);
+                    image.setTag("saved");
+                }else {
+                    image.setImageResource(R.drawable.ic_save_grey);
+                    image.setTag("save");
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
     private void isLiked (String postId,ImageView imageView) {
         FirebaseDatabase.getInstance().getReference().child("Likes").child(postId).addValueEventListener(new ValueEventListener() {
