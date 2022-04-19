@@ -40,7 +40,6 @@ public class FollowersActivity extends AppCompatActivity {
         title = intent.getStringExtra("title");
 
         Toolbar toolbar =findViewById(R.id.toolbar);
-
         getSupportActionBar().setTitle(title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -54,6 +53,7 @@ public class FollowersActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         mSearchData = new ArrayList<>();
         recyclerviewSearchAdapter = new RecyclerviewSearchAdapter(this,mSearchData,false);
+        recyclerView.setAdapter(recyclerviewSearchAdapter);
         idList = new ArrayList<>();
 
         switch (title) {

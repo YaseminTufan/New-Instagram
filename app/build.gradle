@@ -48,6 +48,7 @@ dependencies {
     implementation "com.hendraanggrian.appcompat:socialview:0.2"
     implementation "com.hendraanggrian.appcompat:socialview-commons:0.2"
     implementation 'com.github.CanHub:Android-Image-Cropper:3.3.6'
+    implementation "com.github.skydoves:balloon:1.4.4"
 
 
 
