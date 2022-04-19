@@ -22,12 +22,14 @@ import com.google.firebase.database.ValueEventListener;
 import com.hendraanggrian.appcompat.widget.SocialTextView;
 import com.squareup.picasso.Picasso;
 import com.yasemintufan.instagramfirst.CommentActivity;
+import com.yasemintufan.instagramfirst.FollowersActivity;
 import com.yasemintufan.instagramfirst.R;
 import com.yasemintufan.instagramfirst.fragment.PostDetailFragment;
 import com.yasemintufan.instagramfirst.fragment.ProfileFragment;
 import com.yasemintufan.instagramfirst.model.Post;
 import com.yasemintufan.instagramfirst.model.SearchData;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
@@ -83,6 +85,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
              if (holder.like.getTag().equals("like")) {
                  FirebaseDatabase.getInstance().getReference().child("Likes")
                          .child(post.getPostid()).child(firebaseUser.getUid()).setValue(true);
+                 addNotification(post.getPostid(),post.getPubliser());
              }else {
                  FirebaseDatabase.getInstance().getReference().child("Likes")
                          .child(post.getPostid()).child(firebaseUser.getUid()).removeValue();
@@ -154,6 +157,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 mContext.getSharedPreferences("PREFS",Context.MODE_PRIVATE).edit().putString("postid",post.getPostid()).apply();
                 ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction()
                         .replace(R.id.frameLayout,new PostDetailFragment()).commit();
+            }
+        });
+        holder.noOfLikes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, FollowersActivity.class);
+                intent.putExtra("id",post.getPubliser());
+                intent.putExtra("title","followings");
+                mContext.startActivity(intent);
             }
         });
     }
@@ -258,5 +270,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
             }
         });
+    }
+    private void addNotification (String postId , String publiserId) {
+        HashMap<String,Object> map = new HashMap<>();
+        map.put("userid",publiserId);
+        map.put("text","liked your post.");
+        map.put("postid",postId);
+        map.put("isPost",true);
+        FirebaseDatabase.getInstance().getReference().child("Notifications").child(firebaseUser.getUid()).push().setValue(map);
     }
 }

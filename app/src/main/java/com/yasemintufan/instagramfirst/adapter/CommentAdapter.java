@@ -66,14 +66,10 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
                     holder.imageProfile.setImageResource(R.mipmap.ic_launcher);
                 }else {
                     Picasso.get().load(searchData.getImageurl()).into(holder.imageProfile);
-
                 }
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
         holder.comment.setOnClickListener(new View.OnClickListener() {
@@ -125,11 +121,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
                 }
                 return true;
             }
-
         });
-
     }
-
     @Override
     public int getItemCount() {
         return mComment.size();
